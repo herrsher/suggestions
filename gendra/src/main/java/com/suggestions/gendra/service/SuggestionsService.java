@@ -65,7 +65,7 @@ public class SuggestionsService {
         LevenshteinDistance levenshteinDistance = new LevenshteinDistance();
         final double similaritySore
                 = 100 - 5 * levenshteinDistance.apply(name, comparedName);
-        return similaritySore / 100;
+        return similaritySore > 0 ? similaritySore / 100 : 0;
     }
 
     private double calculateProximity(
@@ -74,8 +74,12 @@ public class SuggestionsService {
         if (value == toCompare) {
             return 1;
         }
+        try {
+            return  1 - Math.abs(
+                    Double.parseDouble(value) - Double.parseDouble(toCompare)) / range;
+        } catch (NumberFormatException e) {
+            return 0;
+        }
 
-        return  1 - Math.abs(
-                Double.parseDouble(value) - Double.parseDouble(toCompare)) / range;
     }
 }
