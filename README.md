@@ -1,4 +1,4 @@
-# suggestions
+# Suggestions
 backend coding challenge one master
 
 ## Cities suggestions project
@@ -13,3 +13,5 @@ backend coding challenge one master
 - In your IDE go to Edit Configurations
 - Add a new maven configuration
 - Name run-project and put "spring-boot:run" in the **Run** input
+
+#### by Carlos Ernesto Garcia D.
