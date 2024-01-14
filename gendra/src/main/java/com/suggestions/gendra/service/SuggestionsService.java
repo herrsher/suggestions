@@ -6,6 +6,7 @@ import com.suggestions.gendra.helper.ReaderHelper;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.similarity.LevenshteinDistance;
+import org.apache.commons.text.similarity.JaroWinklerSimilarity;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -63,11 +64,9 @@ public class SuggestionsService {
 
     private double calculateOnlyNameScore(final String name, final String comparedName) {
         LevenshteinDistance levenshteinDistance = new LevenshteinDistance();
-        final int distance = levenshteinDistance.apply(name, comparedName);
-        final double similarityScore
-                = 1 - (double) distance / Math.max(
-                name.length(), comparedName.length());
-        return 1 - similarityScore;
+        final double similaritySore
+                = 100 - 5 * levenshteinDistance.apply(name, comparedName);
+        return similaritySore / 100;
     }
 
     private double calculateProximity(
